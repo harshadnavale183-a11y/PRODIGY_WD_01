@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <title>Attractive Scroll Navigation Menu</title> 
+  <style>
+        /* ===== RESET & BASIC PAGE STYLE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.7;
+        }
+
+        /* ===== FIXED NAVIGATION BAR ===== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: #222; /* Default color */
+            padding: 20px 0;
+            transition: 0.4s;
+            z-index: 1000;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+        }
+
+        /* Navbar after scrolling */
+        .navbar.scrolled {
+            background: #0066ff;
+            padding: 10px 0;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.4);
+        }
+
+        /* ===== NAVIGATION MENU ITEMS ===== */
+        .navbar ul {
+            display: flex;
+            justify-content: center;
+            gap: 35px;
+            list-style: none;
+        }
+
+        /* Menu links */
+        .navbar ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 19px;
+            font-weight: 600;
+            transition: 0.3s;
+            position: relative;
+        }
+
+        /* Hover underline effect */
+        .navbar ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0%;
+            height: 2px;
+            background: yellow;
+            left: 0;
+            bottom: -5px;
+            transition: 0.3s;
+        }
+
+        .navbar ul li a:hover::after {
+            width: 100%;
+        }
+
+        .navbar ul li a:hover {
+            color: yellow;
+        }
+
+        /* ===== SCROLL INDICATOR BAR ===== */
+        .scroll-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: limegreen;
+            width: 0%;
+            z-index: 2000;
+        }
+
+        /* ===== CONTENT SECTIONS WITH BACKGROUND COLORS ===== */
+        .section {
+            padding: 120px 50px;
+        }
+
+        /* Different background colors for each section */
+        #home {
+            background: #f5f5f5; /* light grey */
+        }
+
+        #about {
+            background: #ffe6cc; /* light orange */
+        }
+
+        #services {
+            background: #d9f2ff; /* light blue */
+        }
+
+        #contact {
+            background: #e6ffe6; /* light green */
+        }
+
+        /* Section heading */
+        .section h1 {
+            font-size: 45px;
+            color: #222;
+            margin-bottom: 20px;
+        }
+
+        .section p {
+            font-size: 20px;
+            color: #444;
+            max-width: 900px;
+        }
+    </style> 
+ </head> 
+ <body> <!-- ===== SCROLL INDICATOR ===== --> 
+  <div class="scroll-indicator" id="scrollBar"></div> <!-- ===== NAVIGATION MENU ===== --> 
+  <nav class="navbar" id="navbar"> 
+   <ul> 
+    <li><a href="#home">Home</a></li> 
+    <li><a href="#about">About</a></li> 
+    <li><a href="#services">Services</a></li> 
+    <li><a href="#contact">Contact</a></li> 
+   </ul> 
+  </nav> <!-- ===== SECTIONS WITH BACKGROUND COLORS ===== --> 
+  <div class="section" id="home"> 
+   <h1>Home Section</h1> 
+   <p>This section shows the start of the page with a smooth navigation bar.</p> 
+  </div> 
+  <div class="section" id="about"> 
+   <h1>About Us</h1> 
+   <p>This section has a soft orange background to make the scrolling more beautiful.</p> 
+  </div> 
+  <div class="section" id="services"> 
+   <h1>Our Services</h1> 
+   <p>This section has a light blue color, making the design look modern and clean.</p> 
+  </div> 
+  <div class="section" id="contact"> 
+   <h1>Contact Us</h1> 
+   <p>The green background gives a fresh look to the final section of the page.</p> 
+  </div> <!-- ===== JAVASCRIPT FOR SCROLL EFFECTS ===== --> 
+  <script>
+        const navbar = document.getElementById("navbar");
+        const scrollBar = document.getElementById("scrollBar");
+
+        window.addEventListener("scroll", function () {
+
+            /* Navbar color changes when scrolling */
+            if (window.scrollY > 50) {
+                navbar.classList.add("scrolled");
+            } else {
+                navbar.classList.remove("scrolled");
+            }
+
+            /* Scroll Indicator */
+            let scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+            let scrollPosition = window.scrollY;
+            let scrollPercent = (scrollPosition / scrollHeight) * 100;
+
+            scrollBar.style.width = scrollPercent + "%";
+        });
+    </script> 
+ </body>
+</html>
